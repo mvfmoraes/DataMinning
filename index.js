@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const consign = require('consign');
-require('./utils/prototype');
+//require('./utils/prototype');
 
 consign()
     .include('./config/middleware.js')

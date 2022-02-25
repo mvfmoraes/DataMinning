@@ -1,0 +1,107 @@
+CREATE TABLE Pedido (
+	Num_Ped INT NOT NULL IDENTITY(1, 1),	
+	Cod_Cli INT NOT NULL,
+	Cod_Sta INT NOT NULL,
+	Data_Ped DATETIME NOT NULL,
+	Val_Ped DECIMAL(11, 2) NOT NULL,
+	PRIMARY KEY(Num_Ped)
+)
+
+CREATE TABLE Parcela(
+	Num_Par INT NOT NULL IDENTITY(1, 1),
+	Num_Ped INT NOT NULL,
+	Data_Venc DATETIME NOT NULL,
+	Val_Venc DECIMAL(11, 2) NOT NULL,
+	Data_Pgto DATETIME NOT NULL,
+	Val_Pgto DECIMAL(11, 2) NOT NULL,
+	PRIMARY KEY(Num_Par)
+)
+
+CREATE TABLE Cliente(
+	Cod_Cli INT NOT NULL IDENTITY(1, 1),
+	Cod_TipoCli INT NOT NULL,
+	Nome_Cli VARCHAR(75) NOT NULL,
+	Data_CadCli DATETIME NOT NULL,
+	Renda_Cli DECIMAL(11, 2) NOT NULL,
+	Sexo_Cli CHAR(1) NOT NULL,
+	PRIMARY KEY(Cod_Cli)
+)
+	
+CREATE TABLE Endereco(
+	Cod_End INT NOT NULL IDENTITY(1, 1),	
+	Cod_TipoEnd INT NOT NULL,
+	Cod_Cid INT NOT NULL,
+	Cod_Cli INT NOT NULL,
+	Nome_Rua VARCHAR(150) NOT NULL,
+	Nome_Bairro VARCHAR(75) NOT NULL,
+	Compl_End VARCHAR(200) NOT NULL,
+	PRIMARY KEY (Cod_End)
+)
+
+CREATE TABLE Conjuge(
+	Cod_Cli  INT NOT NULL IDENTITY(1, 1),	
+	Nome_Conj VARCHAR(150) NOT NULL,
+	Renda_Conj DECIMAL(9, 2) NOT NULL,
+	Sexo_Conj CHAR(1) NOT NULL,
+	PRIMARY KEY (Cod_Cli)
+)
+
+CREATE TABLE Estado(	
+	Sigla_Est  INT NOT NULL IDENTITY(1, 1),	
+	Nome_Est  VARCHAR(25) NOT NULL,
+	primary key(Sigla_Est)
+)
+	
+CREATE TABLE Cidade(
+	Cod_Cid INT NOT NULL IDENTITY(1, 1),	
+	Sigla_Est CHAR(2) NOT NULL,
+	Nome_Cid VARCHAR(50) NOT NULL,
+	PRIMARY KEY (Cod_Cid)
+)
+
+CREATE TABLE TipoCli(
+	Cod_TipoCli INT NOT NULL IDENTITY(1, 1),	
+	Nome_TimeProd VARCHAR(15) NOT NULL,
+	PRIMARY KEY (Cod_TipoCli)
+)
+
+
+CREATE TABLE Fone(		
+	Num_Lanc INT NOT NULL IDENTITY(1, 1),	
+	Cod_Cli INT NOT NULL,
+	Num_Fone VARCHAR(9) NOT NULL,
+	Num_DDD CHAR(3) NOT NULL,
+	PRIMARY KEY (Num_Lanc)
+)
+
+
+CREATE TABLE Credito(	
+	Num_Lanc INT NOT NULL IDENTITY(1, 1),
+	Cod_Cli INT NOT NULL,
+	Cred_Cli INT NOT NULL,
+	Data_CredCli DATETIME NOT NULL,
+	PRIMARY KEY (Num_Lanc)
+)
+
+CREATE TABLE Email(	
+	Num_Lanc INT NOT NULL IDENTITY(1, 1),
+	Cod_Cli INT NOT NULL,
+	Email_Cli VARCHAR(25) NOT NULL,
+	PRIMARY KEY (Num_Lanc)
+)
+
+CREATE TABLE TipoEnd(
+	Cod_TipoEnd INT NOT NULL IDENTITY(1, 1),
+	Nome_TipoEnd VARCHAR(25) NOT NULL,
+	PRIMARY KEY (Cod_TipoEnd)
+)
+USE Dataminning
+ALTER TABLE Historico ADD CONSTRAINT FK_Historico_Funcionario FOREIGN KEY (Cod_Func) REFERENCES Funcionario (Cod_Func)
+ALTER TABLE Pontuacao ADD CONSTRAINT FK_Pontuacao_Funcionario FOREIGN KEY (Cod_Func) REFERENCES Funcionario (Cod_Func)	
+ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_Funcionario FOREIGN KEY (Cod_Cli) REFERENCES Funcionario (Cod_Func)
+ALTER TABLE Pontuacao ADD CONSTRAINT FK_Pontuacao_Bonus FOREIGN KEY (Num_Lanc) REFERENCES Bonus (Num_Lanc)
+ALTER TABLE Produto ADD CONSTRAINT FK_Produto_TipoProd FOREIGN KEY (Cod_Prod) REFERENCES TipoProd (Cod_TipoProd)
+ALTER TABLE Itens ADD CONSTRAINT FK_Itens_Produto FOREIGN KEY (Num_Ped) REFERENCES Produto (Cod_Prod)
+
+--SE PRECISAR DELETAR UMA TABELA:
+-- DROP TABLE 'nome_tabela'

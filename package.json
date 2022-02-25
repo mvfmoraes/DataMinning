@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-mung": "^0.5.1",
     "knex": "^0.21.17",
-    "mssql": "^6.3.1",
+    "mssql": "^6.4.1",
     "mysql": "^2.18.1"
   },
   "devDependencies": {

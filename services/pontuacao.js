@@ -4,9 +4,9 @@ module.exports = app => {
 
     const getAll = async (req, res) => {
         try {
-            const resposta = await app.db('Historico')
+            const resposta = await app.db('Pontuacao')
                 .select()
-                .then(historicos => Sucesso(historicos))
+                .then(pontuacoes => Sucesso(pontuacoes))
                 .catch(erro => Falha(erro));
 
             return res.status(200).send({ status: true, data: Finalizar(resposta) });
@@ -16,12 +16,12 @@ module.exports = app => {
     }
 
     const get = async (req, res) => {
-        const { nun_lanc } = req.params;
+        const { Num_Lanc } = req.params;
         try {
-            const resposta = await app.db('Historico')
+            const resposta = await app.db('Pontuacao')
                 .select()
-                .where({ nun_lanc })
-                .then(historicos => Sucesso(historicos))
+                .where({ Num_Lanc })
+                .then(pontuacoes => Sucesso(pontuacoes))
                 .catch(erro => Falha(erro));
 
             return res.status(200).send({ status: true, data: Finalizar(resposta) });

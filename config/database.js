@@ -1,10 +1,10 @@
 module.exports = require('knex')({
-    client: 'mysql',
+    client: 'mssql',
     connection: {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'streaming',
+        host: 'DESKTOP-3N2SBA1',
+        user: 'michael',
+        password: 'kovalski2306',
+        database: 'DataMinning',
         connectTimeout: 90000,
         options: {
             encrypt: true,
